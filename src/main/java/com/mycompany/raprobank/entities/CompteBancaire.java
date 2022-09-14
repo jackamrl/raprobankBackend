@@ -29,8 +29,10 @@ public class CompteBancaire extends AbstractEntity {
     @Size(min = 1, max = 200)
     @Column(name = "num_compte")
     private String numCompte;
+    @JoinColumn(name = "id_banque", referencedColumnName = "id_banque")
     @ManyToOne(optional = false)
     private Banque banque;
+    @JoinColumn(name = "id_societe", referencedColumnName = "id_societe")
     @ManyToOne(optional = false)
     private Societe societe;
 
