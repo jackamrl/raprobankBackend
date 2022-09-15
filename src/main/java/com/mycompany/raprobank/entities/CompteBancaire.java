@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  *
@@ -35,6 +36,8 @@ public class CompteBancaire extends AbstractEntity {
     @JoinColumn(name = "id_societe", referencedColumnName = "id_societe")
     @ManyToOne(optional = false)
     private Societe societe;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compteBancaire")
+    private List<Mouvement> mouvementList;
 
     public CompteBancaire() {
     }
@@ -65,6 +68,10 @@ public class CompteBancaire extends AbstractEntity {
         return societe;
     }
 
+    public List<Mouvement> getMouvementList() {
+        return mouvementList;
+    }
+
     public void setIdComptebancaire(Integer idComptebancaire) {
         this.idComptebancaire = idComptebancaire;
     }
@@ -83,6 +90,10 @@ public class CompteBancaire extends AbstractEntity {
 
     public void setSociete(Societe societe) {
         this.societe = societe;
+    }
+
+    public void setMouvementList(List<Mouvement> mouvementList) {
+        this.mouvementList = mouvementList;
     }
 
     @Override

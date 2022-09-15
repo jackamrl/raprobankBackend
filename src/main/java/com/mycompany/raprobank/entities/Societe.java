@@ -23,5 +23,61 @@ public class Societe extends AbstractEntity{
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "societe")
     private List<CompteBancaire> compteBancaireList;
-    
+
+    public Societe() {
+    }
+
+    public Societe(Integer idSociete, String description, List<CompteBancaire> compteBancaireList) {
+        this.idSociete = idSociete;
+        this.description = description;
+        this.compteBancaireList = compteBancaireList;
+    }
+
+    public Integer getIdSociete() {
+        return idSociete;
+    }
+
+    public void setIdSociete(Integer idSociete) {
+        this.idSociete = idSociete;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<CompteBancaire> getCompteBancaireList() {
+        return compteBancaireList;
+    }
+
+    public void setCompteBancaireList(List<CompteBancaire> compteBancaireList) {
+        this.compteBancaireList = compteBancaireList;
+    }
+
+    @Override
+    public String toString() {
+        return "Societe{" +
+                "idSociete=" + idSociete +
+                ", description='" + description + '\'' +
+                ", compteBancaireList=" + compteBancaireList +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
