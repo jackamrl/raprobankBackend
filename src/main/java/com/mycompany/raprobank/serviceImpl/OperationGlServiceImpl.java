@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
-public class OperationGlServiceImpl implements OperationGlService {
 
+public class OperationGlServiceImpl implements OperationGlService {
 
     private OperationGlRepo operationGlRepo;
 
@@ -22,10 +23,15 @@ public class OperationGlServiceImpl implements OperationGlService {
     }
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-
     @Override
     public OperationGl addOperationGl(OperationGl operationGl) {
         operationGl.setIdOperation(UUID.randomUUID().variant());
         return operationGlRepo.save(operationGl);
+    }
+
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    @Override
+    public List<OperationGl> findAll() {
+        return (List<OperationGl>) operationGlRepo.findAll();
     }
 }

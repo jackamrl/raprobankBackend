@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/operation")
 public class OperationGlController {
-    @Autowired
+
     private OperationGlService operationGlService;
 
-//    @RequestMapping(path = "mydata")
-//    public void importData(){
-//        operationGlService.importerExtraitGl();
-//    }
+    @Autowired
+    public OperationGlController(OperationGlService operationGlService) {
+        this.operationGlService = operationGlService;
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/add")
@@ -28,9 +29,9 @@ public class OperationGlController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/operationGlList")
+    @GetMapping("/list")
     public ResponseEntity<List<OperationGl>> listOperationGl(){
-        List<OperationGl> operationGls = operationGlService.;
-        return new ResponseEntity<>(companies,HttpStatus.OK);
+        List<OperationGl> operationGls = operationGlService.findAll();
+        return new ResponseEntity<>(operationGls,HttpStatus.OK);
     }
 }
