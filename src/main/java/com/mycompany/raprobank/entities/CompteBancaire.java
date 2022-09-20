@@ -1,5 +1,9 @@
 package com.mycompany.raprobank.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -13,7 +17,11 @@ import java.util.List;
 
 @Entity
 @Table(name="compte_bancaire")
-public class CompteBancaire extends AbstractEntity {
+//To suppress serializing properties with null values
+//@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+//Ignoring new fields on JSON objects
+//@JsonIgnoreProperties(ignoreUnknown = true)
+public class CompteBancaire extends AbstractEntity implements EntityItem<Integer> {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +38,21 @@ public class CompteBancaire extends AbstractEntity {
     @Size(min = 1, max = 200)
     @Column(name = "num_compte")
     private String numCompte;
+    //@JsonIgnore
+    //@JsonBackReference(value = "id_banque")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_banque", referencedColumnName = "id_banque")
-    @ManyToOne(optional = false)
+    @JsonBackReference(value = "id_banque")
     private Banque banque;
+    //@JsonIgnore
+    @JsonBackReference(value = "id_societe")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_societe", referencedColumnName = "id_societe")
-    @ManyToOne(optional = false)
+    //@JsonBackReference
     private Societe societe;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compteBancaire")
+    @JsonManagedReference(value = "compteBancaire")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compteBancaire",fetch=FetchType.LAZY)
+    //@JsonManagedReference
     private List<Mouvement> mouvementList;
 
     public CompteBancaire() {
@@ -47,6 +63,16 @@ public class CompteBancaire extends AbstractEntity {
         this.libelleCompte = libelleCompte;
         this.numCompte = numCompte;
     }
+
+    public CompteBancaire(Integer idComptebancaire, String libelleCompte, String numCompte, Banque banque, Societe societe, List<Mouvement> mouvementList) {
+        this.idComptebancaire = idComptebancaire;
+        this.libelleCompte = libelleCompte;
+        this.numCompte = numCompte;
+        this.banque = banque;
+        this.societe = societe;
+        this.mouvementList = mouvementList;
+    }
+
 
     public Integer getIdComptebancaire() {
         return idComptebancaire;
@@ -60,12 +86,20 @@ public class CompteBancaire extends AbstractEntity {
         return numCompte;
     }
 
+//    @JsonProperty("banque")
     public Banque getBanque() {
         return banque;
     }
 
     public Societe getSociete() {
         return societe;
+    }
+
+    public Integer getIdBanque() {
+        return banque.getIdBanque();
+    }
+    public Integer getIdSociete() {
+        return societe.getIdSociete();
     }
 
     public List<Mouvement> getMouvementList() {
@@ -87,6 +121,7 @@ public class CompteBancaire extends AbstractEntity {
     public void setBanque(Banque banque) {
         this.banque = banque;
     }
+
 
     public void setSociete(Societe societe) {
         this.societe = societe;
@@ -120,5 +155,10 @@ public class CompteBancaire extends AbstractEntity {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public Integer getId() {
+        return idComptebancaire;
     }
 }

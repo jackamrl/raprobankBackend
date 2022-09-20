@@ -11,5 +11,6 @@ public interface BanqueService {
 
     public Banque addBanque(Banque banque);
     public List<Banque> findAll();
+    public Banque findBanqueById(Integer idBanque);
 
 }

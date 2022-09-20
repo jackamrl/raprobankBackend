@@ -2,19 +2,16 @@ package com.mycompany.raprobank.entities;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 //Les opérations du grand livre
 @Entity
-@Table(name = "operation_gl")
+@DiscriminatorValue("Grand Livre")
 public class OperationGl extends Operation{
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date")
+    @Column(name = "date_gl")
     private String date;
     @Basic(optional = false)
     @NotNull
@@ -24,7 +21,7 @@ public class OperationGl extends Operation{
     @Basic(optional = false)
     @NotNull
     @Column(name = "montant")
-    private String montant;
+    private Long montant;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 300)
@@ -34,7 +31,7 @@ public class OperationGl extends Operation{
     public OperationGl() {
     }
 
-    public OperationGl(String date, String libelleOperationGl, String montant, String reference) {
+    public OperationGl(String date, String libelleOperationGl, Long montant, String reference) {
         this.date = date;
         this.libelleOperationGl = libelleOperationGl;
         this.montant = montant;
@@ -45,7 +42,7 @@ public class OperationGl extends Operation{
         super(idOperation, mouvement);
     }
 
-    public OperationGl(Integer idOperation, Mouvement mouvement, String date, String libelleOperationGl, String montant, String reference) {
+    public OperationGl(Integer idOperation, Mouvement mouvement, String date, String libelleOperationGl, Long montant, String reference) {
         super(idOperation, mouvement);
         this.date = date;
         this.libelleOperationGl = libelleOperationGl;
@@ -69,11 +66,11 @@ public class OperationGl extends Operation{
         this.libelleOperationGl = libelleOperationGl;
     }
 
-    public String getMontant() {
+    public Long getMontant() {
         return montant;
     }
 
-    public void setMontant(String montant) {
+    public void setMontant(Long montant) {
         this.montant = montant;
     }
 

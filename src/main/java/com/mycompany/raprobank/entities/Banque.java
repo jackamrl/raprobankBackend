@@ -1,5 +1,6 @@
 package com.mycompany.raprobank.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "banque")
-public class Banque extends AbstractEntity {
+public class Banque extends AbstractEntity implements EntityItem<Integer> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -26,7 +27,9 @@ public class Banque extends AbstractEntity {
     @Size(min = 1, max = 200)
     @Column(name = "libelle_banque")
     private String libelleBanque;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "banque")
+    @JsonManagedReference(value = "banque")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "banque",fetch = FetchType.EAGER)
+    //@JsonManagedReference
     private List<CompteBancaire> compteBancaireList;
 
     public Banque() {
@@ -35,6 +38,12 @@ public class Banque extends AbstractEntity {
     public Banque(Integer idBanque, String libelleBanque) {
         this.idBanque = idBanque;
         this.libelleBanque = libelleBanque;
+    }
+
+    public Banque(Integer idBanque, String libelleBanque, List<CompteBancaire> compteBancaireList) {
+        this.idBanque = idBanque;
+        this.libelleBanque = libelleBanque;
+        this.compteBancaireList = compteBancaireList;
     }
 
     public Banque(Integer idBanque) {
@@ -87,6 +96,11 @@ public class Banque extends AbstractEntity {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public Integer getId() {
+        return idBanque;
     }
 }
 

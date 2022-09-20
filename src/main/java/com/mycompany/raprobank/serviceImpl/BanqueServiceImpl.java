@@ -24,7 +24,7 @@ public class BanqueServiceImpl implements BanqueService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Banque addBanque(Banque banque) {
-        banque.setIdBanque(UUID.randomUUID().variant());
+//        banque.setIdBanque(UUID.randomUUID().variant());
         return banqueRepo.save(banque) ;
     }
 
@@ -32,5 +32,10 @@ public class BanqueServiceImpl implements BanqueService {
     @Override
     public List<Banque> findAll() {
         return banqueRepo.findAll();
+    }
+
+    @Override
+    public Banque findBanqueById(Integer idBanque) {
+        return banqueRepo.findById(idBanque).orElseThrow(()-> new IllegalStateException("La banque"+idBanque+"n'existe pas"));
     }
 }

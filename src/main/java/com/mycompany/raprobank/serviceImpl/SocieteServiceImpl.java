@@ -1,5 +1,6 @@
 package com.mycompany.raprobank.serviceImpl;
 
+import com.mycompany.raprobank.entities.Banque;
 import com.mycompany.raprobank.entities.Societe;
 import com.mycompany.raprobank.repositories.SocieteRepo;
 import com.mycompany.raprobank.services.SocieteService;
@@ -33,5 +34,10 @@ public class SocieteServiceImpl implements SocieteService {
     @Override
     public List<Societe> findAll() {
         return societeRepo.findAll();
+    }
+
+    @Override
+    public Societe findSocieteById(Integer idSociete) {
+        return societeRepo.findById(idSociete).orElseThrow(()-> new IllegalStateException("La societe"+idSociete+"n'existe pas"));
     }
 }

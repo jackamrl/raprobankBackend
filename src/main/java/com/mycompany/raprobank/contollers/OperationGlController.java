@@ -20,18 +20,18 @@ public class OperationGlController {
     public OperationGlController(OperationGlService operationGlService) {
         this.operationGlService = operationGlService;
     }
+//
+//    @CrossOrigin(origins = "*")
+//    @PostMapping("/add")
+//    public ResponseEntity<OperationGl> addOperationGl(@RequestBody OperationGl operationGl){
+//        OperationGl newOperationGl = operationGlService.addOperationGl(operationGl);
+//        return new ResponseEntity<>(newOperationGl, HttpStatus.CREATED);
+//    }
 
-    @CrossOrigin(origins = "*")
-    @PostMapping("/add")
-    public ResponseEntity<OperationGl> addOperationGl(@RequestBody OperationGl operationGl){
-        OperationGl newOperationGl = operationGlService.addOperationGl(operationGl);
-        return new ResponseEntity<>(newOperationGl, HttpStatus.CREATED);
-    }
-
-    @CrossOrigin(origins = "*")
-    @GetMapping("/list")
-    public ResponseEntity<List<OperationGl>> listOperationGl(){
-        List<OperationGl> operationGls = operationGlService.findAll();
-        return new ResponseEntity<>(operationGls,HttpStatus.OK);
-    }
+//    @CrossOrigin(origins = "*")
+//    @GetMapping("/list")
+//    public ResponseEntity<List<OperationGl>> listOperationGl(){
+//        List<OperationGl> operationGls = operationGlService.findAll();
+//        return new ResponseEntity<>(operationGls,HttpStatus.OK);
+//    }
 }

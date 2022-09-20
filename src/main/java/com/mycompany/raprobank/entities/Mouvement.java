@@ -1,5 +1,8 @@
 package com.mycompany.raprobank.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -12,7 +15,7 @@ import java.util.List;
 @Table(name = "mouvement")
 //Un mouvement est soit un extrait de grand livre ou un extrait de releve bancaire
 
-public class Mouvement extends AbstractEntity{
+public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -35,10 +38,15 @@ public class Mouvement extends AbstractEntity{
     @Size(min = 1, max = 200)
     @Column(name = "solde_initial")
     private Long soldeInitial;
+    @JsonBackReference(value = "id_commptebancaire")
     @JoinColumn(name = "id_commptebancaire", referencedColumnName = "id_commptebancaire")
-    @ManyToOne(optional = false)
+    //@JsonBackReference
+    //@JsonIgnore
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CompteBancaire compteBancaire;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mouvement")
+    @JsonManagedReference(value = "mouvement")
+    @OneToMany(fetch=FetchType.LAZY , cascade = CascadeType.ALL, mappedBy = "mouvement")
+    //@JsonManagedReference
     private List<Operation> operationList;
 
     public Mouvement() {
@@ -126,5 +134,10 @@ public class Mouvement extends AbstractEntity{
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public Integer getId() {
+        return idMouvement;
     }
 }

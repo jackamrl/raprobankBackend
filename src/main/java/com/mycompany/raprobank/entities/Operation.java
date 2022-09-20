@@ -1,25 +1,39 @@
 package com.mycompany.raprobank.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 // Il s'agit de l'opération sur chaque extrait
 @Entity
 @Table(name="operation")
-public class Operation {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,
+        name = "operation_type")
+@DiscriminatorValue(value="operation")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Operation extends AbstractEntity implements EntityItem<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name="id_operation")
     private Integer idOperation;
-    @ManyToOne(optional = false)
+    @JsonBackReference(value = "id_mouvement")
+    //@JsonIgnore
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_mouvement", referencedColumnName = "id_mouvement")
+    //@JsonBackReference
     private Mouvement mouvement;
+
 
     public Operation() {
     }
 
-    public Operation(Integer idOperation, Mouvement mouvement) {
+    public Operation(@JsonProperty("idOperation") Integer idOperation, @JsonProperty("mouvement") Mouvement mouvement) {
         this.idOperation = idOperation;
         this.mouvement = mouvement;
     }
@@ -61,5 +75,10 @@ public class Operation {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public Integer getId() {
+        return idOperation;
     }
 }

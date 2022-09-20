@@ -1,5 +1,6 @@
 package com.mycompany.raprobank.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "societe")
-public class Societe extends AbstractEntity{
+public class Societe extends AbstractEntity implements EntityItem<Integer>{
 
     private static final long serialVersionUID = 1L;
 
@@ -21,10 +22,17 @@ public class Societe extends AbstractEntity{
     @Size(min = 1, max = 1000)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "societe")
+    @JsonManagedReference(value = "societe")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "societe", fetch = FetchType.EAGER)
+    //@JsonManagedReference
     private List<CompteBancaire> compteBancaireList;
 
     public Societe() {
+    }
+
+    public Societe(Integer idSociete, String description) {
+        this.idSociete = idSociete;
+        this.description = description;
     }
 
     public Societe(Integer idSociete, String description, List<CompteBancaire> compteBancaireList) {
@@ -32,6 +40,7 @@ public class Societe extends AbstractEntity{
         this.description = description;
         this.compteBancaireList = compteBancaireList;
     }
+
 
     public Integer getIdSociete() {
         return idSociete;
@@ -79,5 +88,10 @@ public class Societe extends AbstractEntity{
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public Integer getId() {
+        return idSociete;
     }
 }

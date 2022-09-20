@@ -30,7 +30,7 @@ public class MouvementController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/list")
-    public ResponseEntity<List<Mouvement>> listOperationGl(){
+    public ResponseEntity<List<Mouvement>> listMouvement(){
         List<Mouvement> mouvements = mouvementService.findAll();
         return new ResponseEntity<>(mouvements,HttpStatus.OK);
     }

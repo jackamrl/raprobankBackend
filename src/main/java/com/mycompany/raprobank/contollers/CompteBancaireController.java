@@ -22,7 +22,7 @@ public class CompteBancaireController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = {"text/plain;charset=UTF-8"})
     public ResponseEntity<CompteBancaire> addCompteBancaire(@RequestBody CompteBancaire unCompteBancaire){
         CompteBancaire newCompteBancaire = compteBancaireService.addCompteBancaire(unCompteBancaire);
         return new ResponseEntity<>(newCompteBancaire, HttpStatus.CREATED);
