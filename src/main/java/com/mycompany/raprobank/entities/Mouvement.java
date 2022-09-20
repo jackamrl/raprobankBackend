@@ -27,7 +27,12 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "periode")
-    private Date periode;
+    private String mois;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "periode")
+    private String annee;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -52,9 +57,10 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     public Mouvement() {
     }
 
-    public Mouvement(Integer idMouvement, Date periode, String type, Long soldeInitial, CompteBancaire compteBancaire, List<Operation> operationList) {
+    public Mouvement(Integer idMouvement, String mois, String annee, String type, Long soldeInitial, CompteBancaire compteBancaire, List<Operation> operationList) {
         this.idMouvement = idMouvement;
-        this.periode = periode;
+        this.mois = mois;
+        this.annee = annee;
         this.type = type;
         this.soldeInitial = soldeInitial;
         this.compteBancaire = compteBancaire;
@@ -65,9 +71,7 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
         return idMouvement;
     }
 
-    public Date getPeriode() {
-        return periode;
-    }
+
 
     public String getType() {
         return type;
@@ -89,8 +93,20 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
         this.idMouvement = idMouvement;
     }
 
-    public void setPeriode(Date periode) {
-        this.periode = periode;
+    public String getMois() {
+        return mois;
+    }
+
+    public void setMois(String mois) {
+        this.mois = mois;
+    }
+
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
     }
 
     public void setType(String type) {
@@ -113,7 +129,7 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     public String toString() {
         return "Mouvement{" +
                 "idMouvement=" + idMouvement +
-                ", periode=" + periode +
+
                 ", type='" + type + '\'' +
                 ", soldeInitial=" + soldeInitial +
                 ", compteBancaire=" + compteBancaire +

@@ -27,6 +27,11 @@ public class Banque extends AbstractEntity implements EntityItem<Integer> {
     @Size(min = 1, max = 200)
     @Column(name = "libelle_banque")
     private String libelleBanque;
+    @Basic(optional = true)
+    @NotNull
+    @Size(min = 1, max = 800)
+    @Column(name = "description")
+    private String description;
     @JsonManagedReference(value = "banque")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "banque",fetch = FetchType.EAGER)
     //@JsonManagedReference
@@ -35,9 +40,10 @@ public class Banque extends AbstractEntity implements EntityItem<Integer> {
     public Banque() {
     }
 
-    public Banque(Integer idBanque, String libelleBanque) {
+    public Banque(Integer idBanque, String libelleBanque, String description) {
         this.idBanque = idBanque;
         this.libelleBanque = libelleBanque;
+        this.description = description;
     }
 
     public Banque(Integer idBanque, String libelleBanque, List<CompteBancaire> compteBancaireList) {
@@ -52,6 +58,14 @@ public class Banque extends AbstractEntity implements EntityItem<Integer> {
 
     public Integer getIdBanque() {
         return idBanque;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLibelleBanque() {

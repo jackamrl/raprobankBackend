@@ -18,6 +18,11 @@ public class Societe extends AbstractEntity implements EntityItem<Integer>{
     @Basic(optional = false)
     @Column(name = "id_societe")
     private Integer idSociete;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "libelle_societe")
+    private String libelleSociete;
     @Basic(optional = true)
     @Size(min = 1, max = 1000)
     @Column(name = "description")
@@ -30,9 +35,10 @@ public class Societe extends AbstractEntity implements EntityItem<Integer>{
     public Societe() {
     }
 
-    public Societe(Integer idSociete, String description) {
+    public Societe(Integer idSociete, String description, String libelleSociete) {
         this.idSociete = idSociete;
         this.description = description;
+        this.libelleSociete = libelleSociete;
     }
 
     public Societe(Integer idSociete, String description, List<CompteBancaire> compteBancaireList) {
@@ -41,6 +47,13 @@ public class Societe extends AbstractEntity implements EntityItem<Integer>{
         this.compteBancaireList = compteBancaireList;
     }
 
+    public String getLibelleSociete() {
+        return libelleSociete;
+    }
+
+    public void setLibelleSociete(String libelleSociete) {
+        this.libelleSociete = libelleSociete;
+    }
 
     public Integer getIdSociete() {
         return idSociete;
