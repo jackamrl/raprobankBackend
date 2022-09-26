@@ -1,9 +1,7 @@
 package com.mycompany.raprobank.contollers;
 
 import com.mycompany.raprobank.entities.Banque;
-import com.mycompany.raprobank.entities.OperationGl;
-import com.mycompany.raprobank.repositories.BanqueRepo;
-import com.mycompany.raprobank.services.BanqueService;
+import com.mycompany.raprobank.service.BanqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

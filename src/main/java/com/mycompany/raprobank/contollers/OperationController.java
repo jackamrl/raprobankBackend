@@ -1,11 +1,9 @@
 package com.mycompany.raprobank.contollers;
 
-import com.mycompany.raprobank.entities.Mouvement;
 import com.mycompany.raprobank.entities.Operation;
 import com.mycompany.raprobank.entities.OperationEb;
 import com.mycompany.raprobank.entities.OperationGl;
-import com.mycompany.raprobank.services.MouvementService;
-import com.mycompany.raprobank.services.OperationService;
+import com.mycompany.raprobank.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

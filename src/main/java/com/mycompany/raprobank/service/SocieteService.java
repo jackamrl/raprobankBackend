@@ -1,6 +1,5 @@
-package com.mycompany.raprobank.services;
+package com.mycompany.raprobank.service;
 
-import com.mycompany.raprobank.entities.Banque;
 import com.mycompany.raprobank.entities.Societe;
 import org.springframework.stereotype.Service;
 

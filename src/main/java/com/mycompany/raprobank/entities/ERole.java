@@ -1,2 +1,7 @@
-package com.mycompany.raprobank.entities;public class ERole {
+package com.mycompany.raprobank.entities;
+
+public enum ERole {
+    ROLE_USER,
+    ROLE_MODERATOR,
+    ROLE_ADMIN,
 }

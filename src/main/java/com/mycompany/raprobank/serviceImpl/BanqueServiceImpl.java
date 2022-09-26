@@ -2,15 +2,18 @@ package com.mycompany.raprobank.serviceImpl;
 
 import com.mycompany.raprobank.entities.Banque;
 import com.mycompany.raprobank.repositories.BanqueRepo;
-import com.mycompany.raprobank.services.BanqueService;
+import com.mycompany.raprobank.service.BanqueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
+@Configuration
+@EnableWebSecurity
 @Service
 public class BanqueServiceImpl implements BanqueService {
 

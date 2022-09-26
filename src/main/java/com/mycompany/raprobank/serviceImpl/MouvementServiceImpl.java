@@ -2,8 +2,10 @@ package com.mycompany.raprobank.serviceImpl;
 
 import com.mycompany.raprobank.entities.Mouvement;
 import com.mycompany.raprobank.repositories.MouvementRepo;
-import com.mycompany.raprobank.services.MouvementService;
+import com.mycompany.raprobank.service.MouvementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+@Configuration
+@EnableWebSecurity
 @Service
 public class MouvementServiceImpl implements MouvementService {
 

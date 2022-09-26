@@ -1,14 +1,9 @@
 package com.mycompany.raprobank.contollers;
 
 
-import com.mycompany.raprobank.entities.OperationGl;
-import com.mycompany.raprobank.services.OperationGlService;
+import com.mycompany.raprobank.service.OperationGlService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/operation")

@@ -1,4 +1,4 @@
-package com.mycompany.raprobank.services;
+package com.mycompany.raprobank.service;
 
 import com.mycompany.raprobank.entities.Operation;
 import com.mycompany.raprobank.entities.OperationEb;

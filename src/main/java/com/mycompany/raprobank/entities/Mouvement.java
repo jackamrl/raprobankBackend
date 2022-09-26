@@ -26,12 +26,12 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "periode")
+    @Column(name = "mois")
     private String mois;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "periode")
+    @Column(name = "annee")
     private String annee;
     @Basic(optional = false)
     @NotNull
