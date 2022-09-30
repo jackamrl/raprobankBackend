@@ -1,14 +1,10 @@
 package com.mycompany.raprobank.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import javax.xml.crypto.Data;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -43,15 +39,13 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     @Size(min = 1, max = 200)
     @Column(name = "solde_initial")
     private Long soldeInitial;
-    @JsonBackReference(value = "id_commptebancaire")
-    @JoinColumn(name = "id_commptebancaire", referencedColumnName = "id_commptebancaire")
-    //@JsonBackReference
-    //@JsonIgnore
+    //@JsonBackReference(value = "id_commptebancaire")
+    @JoinColumn(name = "id_commptebancaire", referencedColumnName = "id_commptebancaire", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CompteBancaire compteBancaire;
-    @JsonManagedReference(value = "mouvement")
+    @JsonIgnore
+    //@JsonManagedReference(value = "mouvement")
     @OneToMany(fetch=FetchType.LAZY , cascade = CascadeType.ALL, mappedBy = "mouvement")
-    //@JsonManagedReference
     private List<Operation> operationList;
 
     public Mouvement() {
@@ -81,8 +75,8 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
         return soldeInitial;
     }
 
-    public CompteBancaire getCompteBancaire() {
-        return compteBancaire;
+    public Integer getCompteBancaire() {
+        return compteBancaire.getIdComptebancaire();
     }
 
     public List<Operation> getOperationList() {

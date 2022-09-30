@@ -38,20 +38,20 @@ public class CompteBancaire extends AbstractEntity implements EntityItem<Integer
     @Size(min = 1, max = 200)
     @Column(name = "num_compte")
     private String numCompte;
-    //@JsonIgnore
+    @JsonIgnore
     //@JsonBackReference(value = "id_banque")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_banque", referencedColumnName = "id_banque")
-    @JsonBackReference(value = "id_banque")
+    //@JsonBackReference(value = "id_banque")
     private Banque banque;
-    //@JsonIgnore
-    @JsonBackReference(value = "id_societe")
+    @JsonIgnore
+    //@JsonBackReference(value = "id_societe")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_societe", referencedColumnName = "id_societe")
-    //@JsonBackReference
     private Societe societe;
-    @JsonManagedReference(value = "compteBancaire")
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compteBancaire",fetch=FetchType.LAZY)
+    @JsonIgnore
+    //@JsonManagedReference(value = "compteBancaire")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compteBancaire",fetch=FetchType.EAGER)
     //@JsonManagedReference
     private List<Mouvement> mouvementList;
 

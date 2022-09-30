@@ -4,6 +4,7 @@ import com.mycompany.raprobank.entities.CompteBancaire;
 import com.mycompany.raprobank.service.CompteBancaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class CompteBancaireController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping(value = "/add", consumes = {"text/plain;charset=UTF-8"})
+    @PostMapping(value = "/add", consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompteBancaire> addCompteBancaire(@RequestBody CompteBancaire unCompteBancaire){
         CompteBancaire newCompteBancaire = compteBancaireService.addCompteBancaire(unCompteBancaire);
         return new ResponseEntity<>(newCompteBancaire, HttpStatus.CREATED);

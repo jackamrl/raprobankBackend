@@ -1,5 +1,6 @@
 package com.mycompany.raprobank.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
@@ -27,9 +28,9 @@ public class Societe extends AbstractEntity implements EntityItem<Integer>{
     @Size(min = 1, max = 1000)
     @Column(name = "description")
     private String description;
-    @JsonManagedReference(value = "societe")
+    //@JsonManagedReference(value = "societe")
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "societe", fetch = FetchType.EAGER)
-    //@JsonManagedReference
     private List<CompteBancaire> compteBancaireList;
 
     public Societe() {
