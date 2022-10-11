@@ -29,7 +29,7 @@ public class SocieteServiceImpl implements SocieteService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Societe addSociete(Societe societe) {
-        societe.setIdSociete(UUID.randomUUID().variant());
+        //societe.setIdSociete(UUID.randomUUID().variant());
         return societeRepo.save(societe);
     }
 
