@@ -43,7 +43,7 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     @JoinColumn(name = "id_commptebancaire", referencedColumnName = "id_commptebancaire", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CompteBancaire compteBancaire;
-    @JsonIgnore
+    //@JsonIgnore
     //@JsonManagedReference(value = "mouvement")
     @OneToMany(fetch=FetchType.LAZY , cascade = CascadeType.ALL, mappedBy = "mouvement")
     private List<Operation> operationList;

@@ -38,13 +38,13 @@ public class CompteBancaire extends AbstractEntity implements EntityItem<Integer
     @Size(min = 1, max = 200)
     @Column(name = "num_compte")
     private String numCompte;
-    @JsonIgnore
+    //@JsonIgnore
     //@JsonBackReference(value = "id_banque")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_banque", referencedColumnName = "id_banque")
     //@JsonBackReference(value = "id_banque")
     private Banque banque;
-    @JsonIgnore
+    //  @JsonIgnore
     //@JsonBackReference(value = "id_societe")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_societe", referencedColumnName = "id_societe")
@@ -87,19 +87,30 @@ public class CompteBancaire extends AbstractEntity implements EntityItem<Integer
     }
 
 //    @JsonProperty("banque")
+    //@JsonIgnore
     public Banque getBanque() {
         return banque;
     }
-
+    
+    //@JsonIgnore
     public Societe getSociete() {
         return societe;
     }
 
+    //@JsonIgnore
     public Integer getIdBanque() {
-        return banque.getIdBanque();
-    }
+        return banque.getIdBanque(); }
+    //@JsonIgnore
     public Integer getIdSociete() {
         return societe.getIdSociete();
+    }
+
+    public String getLibelleBanque() {
+        return banque.getLibelleBanque();
+    }
+
+    public String getLibelleSociete() {
+        return societe.getLibelleSociete();
     }
 
     public List<Mouvement> getMouvementList() {

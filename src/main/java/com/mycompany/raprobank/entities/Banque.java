@@ -14,7 +14,9 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "banque")
+@Table(name = "banque",  uniqueConstraints = {
+        @UniqueConstraint(columnNames = "libelle_banque")
+})
 public class Banque extends AbstractEntity implements EntityItem<Integer> {
 
     private static final long serialVersionUID = 1L;
@@ -34,7 +36,7 @@ public class Banque extends AbstractEntity implements EntityItem<Integer> {
     @Column(name = "description")
     private String description;
     //@JsonManagedReference(value = "banque")
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "banque",fetch = FetchType.EAGER)
     private List<CompteBancaire> compteBancaireList;
 
@@ -72,7 +74,7 @@ public class Banque extends AbstractEntity implements EntityItem<Integer> {
     public String getLibelleBanque() {
         return libelleBanque;
     }
-
+    @JsonIgnore
     public List<CompteBancaire> getCompteBancaireList() {
         return compteBancaireList;
     }

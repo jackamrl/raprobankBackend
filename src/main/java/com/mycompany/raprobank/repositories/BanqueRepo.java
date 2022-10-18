@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BanqueRepo extends JpaRepository<Banque, Integer> {
+    //To verifiy if this libelleBanque exist
+    Boolean existsByLibelleBanque(String libelleBanque);
 }

@@ -9,7 +9,9 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "societe")
+@Table(name = "societe",  uniqueConstraints = {
+        @UniqueConstraint(columnNames = "libelle_societe")
+})
 public class Societe extends AbstractEntity implements EntityItem<Integer>{
 
     private static final long serialVersionUID = 1L;
