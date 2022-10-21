@@ -1,6 +1,7 @@
 package com.mycompany.raprobank.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -45,7 +46,7 @@ public class Mouvement extends AbstractEntity implements EntityItem<Integer>{
     private CompteBancaire compteBancaire;
     //@JsonIgnore
     //@JsonManagedReference(value = "mouvement")
-    @OneToMany(fetch=FetchType.LAZY , cascade = CascadeType.ALL, mappedBy = "mouvement")
+    @OneToMany(fetch=FetchType.LAZY , cascade = CascadeType.MERGE, mappedBy = "mouvement")
     private List<Operation> operationList;
 
     public Mouvement() {

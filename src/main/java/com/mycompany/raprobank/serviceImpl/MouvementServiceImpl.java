@@ -27,7 +27,7 @@ public class MouvementServiceImpl implements MouvementService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public Mouvement addMouvement(Mouvement mouvement) {
-        mouvement.setIdMouvement(UUID.randomUUID().variant());
+        //mouvement.setIdMouvement(UUID.randomUUID().variant());
         return mouvementRepo.save(mouvement);
     }
 

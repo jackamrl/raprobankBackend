@@ -22,10 +22,10 @@ public class Operation extends AbstractEntity implements EntityItem<Integer>{
     @Basic(optional = false)
     @Column(name="id_operation")
     private Integer idOperation;
-    @JsonIgnore
+    //@JsonIgnore
     //@JsonBackReference(value = "id_mouvement")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_mouvement", referencedColumnName = "id_mouvement")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_mouvement", referencedColumnName = "id_mouvement", nullable = false)
     private Mouvement mouvement;
 
 

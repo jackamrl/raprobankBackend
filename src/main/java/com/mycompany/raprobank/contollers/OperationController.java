@@ -6,6 +6,7 @@ import com.mycompany.raprobank.entities.OperationGl;
 import com.mycompany.raprobank.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,14 +54,14 @@ public class OperationController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/addOperationEb")
+    @PostMapping(value = "/addOperationEb", consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Operation> addOperationEb(@RequestBody OperationEb uneOperationEb){
         OperationEb newOperationEb = operationService.addOperationEb(uneOperationEb);
         return new ResponseEntity<>(newOperationEb, HttpStatus.CREATED);
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/addOperationGl")
+    @PostMapping(value = "/addOperationGl",consumes= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Operation> addOperationGl(@RequestBody OperationGl uneOperationGl){
         OperationGl newOperationGl = operationService.addOperationGl(uneOperationGl);
         return new ResponseEntity<>(newOperationGl, HttpStatus.CREATED);
